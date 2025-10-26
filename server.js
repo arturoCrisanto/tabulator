@@ -3,10 +3,15 @@ import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
-import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
+import {
+  notFound,
+  errorHandler,
+  jsonParseErrorHandler,
+} from "./middleware/errorMiddleware.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import voteRoutes from "./routes/voteRoutes.js";
 import apiInfoRoutes from "./routes/apiInfoRoutes.js";
+import healthRoutes from "./routes/healthRoutes.js";
 import { setupGracefulShutdown, startServer } from "./utils/serverUtils.js";
 
 dotenv.config();
@@ -33,32 +38,10 @@ app.use(
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 // Custom error handler for JSON parsing errors
-app.use((error, req, res, next) => {
-  if (error instanceof SyntaxError && error.status === 400 && "body" in error) {
-    console.error("JSON Parse Error:", error.message);
-    console.error("Request body:", req.body);
-    console.error("Request headers:", req.headers);
-    return res.status(400).json({
-      error: "Invalid JSON format",
-      message:
-        "The request body contains malformed JSON. Please check your JSON syntax.",
-      details: error.message,
-    });
-  }
-  next(error);
-});
-
-// Health check route
-app.get("/", (req, res) => {
-  res.json({
-    message: "🎯 Tabulator API Server is running!",
-    status: "healthy",
-    timestamp: new Date().toISOString(),
-    version: "1.0.0",
-  });
-});
+app.use(jsonParseErrorHandler);
 
 // API routes
+app.use("/", healthRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/votes", voteRoutes);
 app.use("/api", apiInfoRoutes);
