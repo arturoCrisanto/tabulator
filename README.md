@@ -13,6 +13,9 @@ A comprehensive RESTful API built with Express.js and MongoDB for managing event
 - **Admin Dashboard**: Comprehensive admin panel with statistics
 - **Authentication**: JWT-based authentication for secure access
 - **Database Seeding**: Built-in data seeding for testing
+- **API Documentation**: Built-in API endpoint documentation
+- **Graceful Shutdown**: Proper server shutdown handling
+- **Modular Architecture**: Well-organized codebase with separation of concerns
 
 ## 🛠️ Tech Stack
 
@@ -24,6 +27,7 @@ A comprehensive RESTful API built with Express.js and MongoDB for managing event
 - **Development**: nodemon for hot reloading
 - **Logging**: Morgan for HTTP request logging
 - **CORS**: Cross-Origin Resource Sharing enabled
+- **Architecture**: Modular MVC pattern with separated utilities
 
 ## 📋 Prerequisites
 
@@ -93,7 +97,11 @@ Before running this application, make sure you have the following installed:
 
 The API will be available at `http://localhost:5000/api`
 
-### 🔐 Authentication Endpoints
+### � Interactive API Documentation
+
+Visit `http://localhost:5000/api` to see the complete interactive API documentation with all available endpoints, request/response formats, and examples.
+
+### �🔐 Authentication Endpoints
 
 | Method | Endpoint              | Description        |
 | ------ | --------------------- | ------------------ |
@@ -175,17 +183,37 @@ tabulator/
 │   └── voteModel.js          # Vote schema
 ├── routes/
 │   ├── adminRoutes.js        # Admin API routes
+│   ├── apiInfoRoutes.js      # API documentation route
 │   └── voteRoutes.js         # Voting API routes
 ├── seeders/
 │   └── seeder.js            # Database seeding
 ├── utils/
-│   └── generateToken.js      # JWT utilities
+│   ├── generateToken.js      # JWT utilities
+│   └── serverUtils.js        # Server startup & shutdown utilities
 ├── .env                      # Environment variables
 ├── .gitignore               # Git ignore rules
 ├── package.json             # Dependencies & scripts
 ├── server.js                # Main application file
 └── README.md                # This file
 ```
+
+## 🔧 Code Architecture
+
+### Server Structure
+
+- **Modular Design**: Separated concerns with dedicated utility modules
+- **Route Organization**: Clean route separation with dedicated API info endpoint
+- **Error Handling**: Comprehensive error handling with custom middleware
+- **Graceful Shutdown**: Proper process signal handling for clean shutdowns
+- **Environment Management**: Robust configuration management with dotenv
+
+### Key Components
+
+- **Server Utils**: Centralized server startup and shutdown logic
+- **API Info Routes**: Self-documenting API with endpoint listings
+- **Authentication Middleware**: JWT-based security implementation
+- **Database Integration**: MongoDB with Mongoose ODM
+- **Error Middleware**: Standardized error responses
 
 ## 🔧 Available Scripts
 
