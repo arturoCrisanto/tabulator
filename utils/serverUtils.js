@@ -40,7 +40,6 @@ export const startServer = (app, PORT, NODE_ENV) => {
   app.listen(PORT, () => {
     console.log(`🚀 Server running in ${NODE_ENV} mode on port ${PORT}`);
     console.log(`📊 Admin Panel: http://localhost:${PORT}/api`);
-    console.log(`🔗 API Base URL: http://localhost:${PORT}/api`);
     console.log(
       `💾 Database: ${
         process.env.MONGO_URI ? "Connected" : "Check MONGO_URI in .env"
