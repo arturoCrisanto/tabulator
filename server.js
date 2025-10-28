@@ -34,6 +34,8 @@ app.use(
     type: "application/json",
   })
 );
+app.disable("x-powered-by");
+app.disable("etag");
 
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
