@@ -52,7 +52,7 @@ app.use(errorHandler);
 
 // Start server
 const PORT = process.env.PORT || 5000;
-const NODE_ENV = process.env.NODE_ENV || "development";
+const NODE_ENV = process.env.NODE_ENV;
 
 startServer(app, PORT, NODE_ENV);
 setupGracefulShutdown();
